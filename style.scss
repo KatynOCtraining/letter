@@ -1,15 +1,13 @@
-//Colors
+// Colors
 $bg: #000;
-
 $tab-bg: #f9f9f9;
-
 $f-color: #ba9872;
 $s-color: #967b5c;
 $t-color: #a38564;
 $fo-color: #f9f9f9;
 $fi-color: #e2e2e2;
 
-//Mixins
+// Mixins
 @mixin posAbsolute($p) {
   width: 100%;
   height: 100%;
@@ -47,7 +45,7 @@ body {
   }
 }
 
-//Styles
+// Styles
 .envelop {
   width: 15rem;
   height: 10rem;
@@ -144,71 +142,101 @@ body {
   &__content {
     @include posAbsolute(a);
     z-index: 200;
+    overflow: hidden;
   }
 }
 
-.love-notes {
+.pdf-container {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .note {
-  width: 95%;
-  height: 30%;
-  background-color: $tab-bg;
+  width: 100%;
+  height: 100%;
   position: absolute;
   overflow: hidden;
-  transition: height 0.5s, opacity 0.25s;
+  transition: opacity 0.25s;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
   &:nth-child(1) {
-    bottom: 60%;
+    bottom: 0;
   }
 
-  &:nth-child(2) {
-    bottom: 40%;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s, height 0.5s;
   }
 
-  &:nth-child(3) {
-    bottom: 20%;
-  }
-
-  &:hover {
-    cursor: pointer;
-    height: 45%;
-  }
-
-  &__text {
-    font-family: "Sofia";
-    padding: 1rem;
-
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-family: "Whisper";
-      font-weight: 700;
-
-      @media (min-width: 300px) and (max-width: 600px) {
-        font-size: 1.025rem;
-      }
-      @media (min-width: 600px) {
-        font-size: 1.15rem;
-      }
-    }
+  img.open {
+    transform: none;
+    height: 100%; /* Adjust to full image height */
   }
 }
 
-.scissors {
-  cursor: url("https://i.postimg.cc/GtLCdKxR/sisors.png"), pointer;
-  &:active {
-    cursor: url("https://i.postimg.cc/GtXQ7WPZ/pngwing-com.png"), pointer;
-  }
+.note-container.open {
+  height: auto;
+  overflow-y: auto;
 }
 
-.cursor {
+/* Style de la modale */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Style pour la fermeture de la modale */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
   cursor: pointer;
+}
+
+/* Style pour le contenu de la modale (l'image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Animation de la modale */
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.modal-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+.hidden {
+  display: none;
 }

@@ -13,6 +13,11 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   </head>
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01" />
+  </div>
   <body class="scissors">
     <div class="envelop">
       <div class="envelop__front-paper"></div>
@@ -23,27 +28,11 @@
       <div class="envelop__content js-envelop-content">
         <div class="love-notes">
           <div class="note js-note">
-            <div class="note__text">
-              <p>Ma chère, ma tendre, mon irrésisitble amour...</p>
-            </div>
-          </div>
-          <div class="note js-note">
-            <div class="note__text">
-              <p>
-                Si tu pouvais ne serait-ce qu'imagine à quel point t'avoir dans
-                ma vie m'apporte un bonheur quotidien
-              </p>
-            </div>
-          </div>
-          <div class="note js-note">
-            <div class="note__text">
-              <p>
-                Comme il est doux et reconfortant pour moi, au moment ou je me
-                couche d'imaginer notre futur vie, notre futur maison, nos
-                futurs enfants...
-              </p>
-              <p>Je t'aime ! &hearts;.</p>
-            </div>
+            <img
+              id="pdfImage"
+              src="./images/grossesse_page-0001.jpg"
+              alt="Page 1 du PDF"
+            />
           </div>
         </div>
       </div>

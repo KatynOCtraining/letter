@@ -3,99 +3,13 @@ const mobile_media_query = window.matchMedia("(max-width: 400px)");
 const tablet_media_query = window.matchMedia(
   "(min-width: 400px) and (max-width: 600px)"
 );
-const notes = document.querySelectorAll(".js-note");
 
-// Fonction qui réinitialise la taille des notes
-function resizeNotes() {
-  for (let i = 0; i < notes.length; i++) {
-    if (notes[i].classList.contains("active")) {
-      notes[i].classList.remove("active");
-      gsap.set(notes[i], {
-        height: "30%",
-        clearProps: "all",
-      });
-    }
-  }
-}
-
-// Fonction principale qui active toutes les notes
+// Fonction principale qui active le contenu
 function notesReady() {
   gsap.to(".js-envelop-content", {
     height: "110%",
     duration: 0.5,
   });
-
-  for (let i = 0; i < notes.length; i++) {
-    notes[i].addEventListener("click", function () {
-      if (mobile_media_query.matches) {
-        if (this.classList.contains("active")) {
-          this.classList.remove("active");
-          gsap.set(this, {
-            height: "30%",
-            clearProps: "all",
-          });
-        } else {
-          for (let i = 0; i < notes.length; i++) {
-            if (notes[i].classList.contains("active")) {
-              notes[i].classList.remove("active");
-              gsap.set(notes[i], {
-                height: "30%",
-                clearProps: "all",
-              });
-            }
-          }
-          this.classList.add("active");
-          gsap.set(this, {
-            height: 125 + 40 * i + "%",
-          });
-        }
-      } else if (tablet_media_query.matches) {
-        if (this.classList.contains("active")) {
-          this.classList.remove("active");
-          gsap.set(this, {
-            height: "30%",
-            clearProps: "all",
-          });
-        } else {
-          for (let i = 0; i < notes.length; i++) {
-            if (notes[i].classList.contains("active")) {
-              notes[i].classList.remove("active");
-              gsap.set(notes[i], {
-                height: "30%",
-                clearProps: "all",
-              });
-            }
-          }
-          this.classList.add("active");
-          gsap.set(this, {
-            height: 80 + 21 * i + "%",
-          });
-        }
-      } else {
-        if (this.classList.contains("active")) {
-          this.classList.remove("active");
-          gsap.set(this, {
-            height: "30%",
-            clearProps: "all",
-          });
-        } else {
-          for (let i = 0; i < notes.length; i++) {
-            if (notes[i].classList.contains("active")) {
-              notes[i].classList.remove("active");
-              gsap.set(notes[i], {
-                height: "30%",
-                clearProps: "all",
-              });
-            }
-          }
-          this.classList.add("active");
-          gsap.set(this, {
-            height: 70 + 20 * i + "%",
-          });
-        }
-      }
-    });
-  }
 }
 
 // Fonction qui configure le papier de l'enveloppe
@@ -158,5 +72,35 @@ if (stickerElement) {
 }
 
 window.onresize = function (event) {
-  resizeNotes();
-};
+  // No resize handling needed
+}; // Obtenez l'élément de la lettre
+const letter = document.querySelector(".envelop__content");
+
+// Obtenez l'élément de la modale
+const modal = document.getElementById("myModal");
+
+// Obtenez l'élément de l'image à afficher dans la modale
+const modalImg = document.getElementById("img01");
+
+// Ajoutez un écouteur d'événements au clic sur la lettre
+letter.addEventListener("click", function () {
+  // Affichez la modale
+  modal.style.display = "block";
+  // Définissez l'image source de la modale sur l'image de la lettre
+  modalImg.src = this.querySelector("img").src;
+
+  // Ajoutez une classe pour masquer l'enveloppe
+  document.querySelector(".envelop").classList.add("hidden");
+});
+
+// Obtenez l'élément pour fermer la modale
+const span = document.getElementsByClassName("close")[0];
+
+// Ajoutez un écouteur d'événements au clic sur le bouton de fermeture
+span.addEventListener("click", function () {
+  // Fermez la modale lorsque l'utilisateur clique sur le bouton de fermeture
+  modal.style.display = "none";
+
+  // Supprimez la classe pour afficher à nouveau l'enveloppe
+  document.querySelector(".envelop").classList.remove("hidden");
+});
